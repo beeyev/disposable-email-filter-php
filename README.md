@@ -1,4 +1,4 @@
-# 🗑 Disposable email detection
+# 🗑 Disposable email detection 22
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
