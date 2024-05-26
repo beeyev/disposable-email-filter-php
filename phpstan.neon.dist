@@ -17,8 +17,6 @@ rules:
 	- Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 	# Removing parent param type is forbidden
 	- Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
-	# New objects with "%s" name are overridden. This can lead to unwanted bugs, please pick a different name to avoid it.
-	- Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 	# Use explicit names over dynamic ones
 	- Symplify\PHPStanRules\Rules\NoDynamicNameRule
 	# Use local named constant instead of inline string for regex to explain meaning by constant name
