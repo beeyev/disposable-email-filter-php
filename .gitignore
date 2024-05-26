@@ -1,0 +1,11 @@
+# Alexander Tebiev - https://github.com/beeyev
+.php-cs-fixer.cache
+.phpunit.result.cache
+composer.lock
+.idea/
+.vscode/
+vendor/
+index.php
+phpunit.xml
+updater/ReleaseNotesUpdater/release_notes.md
+example.php

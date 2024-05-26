@@ -1,0 +1,79 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: Code Style fixer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [master]
+    paths:
+      - "**.php"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  code-style:
+    name: Code Style fixer
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: |-
+      github.event.pull_request.draft == false
+      || !startsWith(github.head_ref, 'code-style-fix/')
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      PHP-VERSION: '7.2'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Get changed PHP files
+        id: changed-php-files
+        uses: tj-actions/changed-files@v40
+        with:
+          files: |
+            **/*.php
+
+      - name: Prepare PHP Environment
+        if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
+        uses: ./.github/actions/prepare-php-environment/
+        with:
+          PHP_VERSION: ${{ env.PHP_VERSION }}
+
+      - name: Cache PHP CS Fixer results
+        if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: ./.php-cs-fixer.cache
+          key: php-cs-fixer-cache-${{ github.workflow }}
+
+      - name: PHP CS Fixer
+        if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
+        run: |
+          echo ${{ steps.changed-php-files.outputs.all_changed_files }} | xargs ls -1df 2>/dev/null | xargs --no-run-if-empty php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --ansi
+
+      - name: Commit changed files
+        if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: |
+            *.php
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Apply code-style-fixer changes as of ${{ github.sha }}
+          title: "[code-style-fix] Fix coding standards in: ${{ github.head_ref || github.ref_name}}"
+          branch: code-style-fix/${{ github.head_ref || github.sha }}
+          delete-branch: true
+          assignees: ${{ github.actor }}
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          labels: code-style-fixer
+          body: |
+            Please apply these changes on the `${{ github.head_ref || github.base_ref || github.ref_name }}` branch #${{ github.event.pull_request.number }} to fix coding standard violations.

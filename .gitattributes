@@ -1,0 +1,20 @@
+# Alexander Tebiev - https://github.com/beeyev
+
+* text=auto eol=lf
+
+.github/                    export-ignore
+tests/                      export-ignore
+updater/                    export-ignore
+.cs-fixer-ignore-changes    export-ignore
+.editorconfig               export-ignore
+.gitattributes              export-ignore
+.gitignore                  export-ignore
+.php-cs-fixer.dist.php      export-ignore
+Makefile                    export-ignore
+phpstan.neon.dist           export-ignore
+phpunit.xml.dist            export-ignore
+
+blacklist.txt                   export-ignore
+whitelist.txt                   export-ignore
+disposable_email_domains.json   export-ignore
+disposable_email_domains.txt    export-ignore

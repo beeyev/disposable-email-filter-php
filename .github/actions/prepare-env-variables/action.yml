@@ -1,0 +1,31 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: Prepare Docker env variables
+description: 'Prepare env variables'
+outputs:
+  DATE_YEAR_WEEKNUM:
+    description: "DATE_YEAR_WEEKNUM"
+    value: ${{ steps.prepare-env-variables.outputs.DATE_YEAR_WEEKNUM }}
+  BUILD_DATE:
+    description: "BUILD_DATE"
+    value: ${{ steps.prepare-env-variables.outputs.BUILD_DATE }}
+  BUILD_DATE_GIT_BRANCH:
+    description: "BUILD_DATE_GIT_BRANCH"
+    value: ${{ steps.prepare-env-variables.outputs.BUILD_DATE_GIT_BRANCH }}
+  BUILD_FINGERPRINT:
+    description: "BUILD_FINGERPRINT"
+    value: ${{ steps.prepare-env-variables.outputs.BUILD_FINGERPRINT }}
+  CURRENT_BRANCH_NAME:
+    description: "CURRENT_BRANCH_NAME"
+    value: ${{ steps.prepare-env-variables.outputs.CURRENT_BRANCH_NAME }}
+runs:
+  using: "composite"
+  steps:
+    - id: prepare-env-variables
+      shell: bash
+      run: |
+        echo "DATE_YEAR_WEEKNUM=$(TZ=':UTC' date +'%Y-%U')" >> ${GITHUB_OUTPUT}
+        echo "BUILD_DATE=$(date -u +'%Y-%m-%d %H:%M:%S (%Z)')" >> ${GITHUB_OUTPUT}
+        echo "BUILD_DATE_GIT_BRANCH=$(date -u +'%Y-%m-%d_%H-%M-%S_(%Z)')" >> ${GITHUB_OUTPUT}
+        echo "NOW_RFC_3339=$(date -u --rfc-3339=seconds | sed 's/ /T/')" >> ${GITHUB_OUTPUT}
+        echo "BUILD_FINGERPRINT=$(git rev-parse --short HEAD)" >> ${GITHUB_OUTPUT}
+        echo "CURRENT_BRANCH_NAME=$(git branch --show-current)" >> ${GITHUB_OUTPUT}

@@ -1,0 +1,78 @@
+# Alexander Tebiev - https://github.com/beeyev
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Bazel: https://bazel.build/
+# https://github.com/bazelbuild/buildtools/blob/master/BUILD.bazel
+[*.{bazel,bzl}]
+indent_size = 4
+indent_style = space
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.{neon,neon.dist}]
+indent_style = tab
+indent_size = 4
+
+[{*.cjsx,*.coffee}]
+indent_size = 2
+tab_width = 2
+
+[*.{md,txt}]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+[{Makefile,Caddyfile,*.Caddyfile}]
+indent_style = tab
+tab_width = 4
+
+# Python
+# https://www.python.org/dev/peps/pep-0008/#code-lay-out
+[*.py]
+indent_size = 4
+indent_style = space
+
+# Shell
+# https://google.github.io/styleguide/shell.xml#Indentation
+[*.{bash,sh,zsh}]
+indent_size = 2
+indent_style = space
+
+# Go
+# https://golang.org/cmd/gofmt/
+[{go.mod,*.go}]
+indent_style = tab
+
+[{Dockerfile,Dockerfile.template.erb,Dockerfile-alpine}]
+indent_style = space
+indent_size = 4
+
+[*.env]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# JavaScript, JSON, JSX, JavaScript Modules, TypeScript
+# https://github.com/feross/standard
+[*.{cjs,js,json,jsx,mjs,ts,tsx}]
+indent_size = 2
+indent_style = space
+
+# TOML
+# https://github.com/toml-lang/toml/tree/master/examples
+[*.toml]
+indent_size = 2
+indent_style = space
+
+[composer.json]
+indent_size = 4
+indent_style = space

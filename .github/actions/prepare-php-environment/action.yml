@@ -1,0 +1,67 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: Prepare PHP Environment
+description: 'Prepare PHP Environment'
+inputs:
+  PHP_VERSION:
+    required: true
+    description: 'PHP Version'
+  PHP_EXTENSIONS:
+    required: false
+    description: 'PHP Extensions'
+    default: 'opcache'
+  PHP_INI_VALUES:
+    required: false
+    description: 'PHP INI Values'
+    default: 'error_reporting=E_ALL'
+  PHP_TOOLS:
+    required: false
+    description: 'PHP Tools'
+    default: 'composer:v2'
+  USE_COVERAGE:
+    required: false
+    description: 'Use coverage, yes / no'
+    default: 'no'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup PHP cache environment
+      id: cache-PHP_EXTENSIONS
+      uses: shivammathur/cache-extensions@v1
+      with:
+        php-version: inputs.PHP_VERSION
+        extensions: inputs.PHP_EXTENSIONS
+        key: PHP_EXTENSIONS-${{ github.workflow }}
+
+    - name: Cache PHP extensions
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.cache-PHP_EXTENSIONS.outputs.dir }}
+        key: ${{ steps.cache-PHP_EXTENSIONS.outputs.key }}
+        restore-keys: ${{ steps.cache-PHP_EXTENSIONS.outputs.key }}
+
+    - name: Setup PHP Action
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.PHP_VERSION }}
+        extensions: ${{ inputs.PHP_EXTENSIONS }}
+        coverage: ${{ ((inputs.USE_COVERAGE == 'yes') && 'xdebug') || 'none' }}
+        ini-values: ${{ inputs.PHP_INI_VALUES }}
+        tools: ${{ inputs.php-tools }}
+
+    - name: Get composer cache directory
+      id: composer-cache-files-dir
+      shell: bash
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      id: cache-composer-dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ steps.composer-cache-files-dir.outputs.dir }}
+          vendor/
+        key: composer-${{ inputs.PHP_VERSION }}-${{ github.workflow }}
+        restore-keys: composer-${{ inputs.PHP_VERSION }}-${{ github.workflow }}
+
+    - name: Install composer dependencies
+      uses: ramsey/composer-install@v3

@@ -1,0 +1,10 @@
+<?php
+/**
+ * Test
+ */
+return [
+    'abc1.com' => true,
+    'abc2.com' => true,
+    'test1.nl' => true,
+    'test2.nl' => true,
+];

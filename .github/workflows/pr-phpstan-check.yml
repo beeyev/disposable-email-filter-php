@@ -1,0 +1,58 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: PHPStan check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [master]
+    paths:
+      - "**.php"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  phpstan-check:
+    name: PHPStan check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: |-
+      github.event.pull_request.draft == false
+      || !startsWith(github.head_ref, 'code-style-fix/')
+    env:
+      PHP-VERSION: '7.2'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Prepare PHP Environment
+        uses: ./.github/actions/prepare-php-environment/
+        with:
+          PHP_VERSION: ${{ env.PHP_VERSION }}
+
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1
+
+      - name: Find PHPStan cache dir
+        id: phpstan-result-cache-dir
+        run: |
+          php --version
+          echo "PHPSTAN_CACHE_DIR=$(php -r "echo sys_get_temp_dir() . '/phpstan';")" >> $GITHUB_OUTPUT
+
+      # Cache PHPStan results discussion: https://github.com/phpstan/phpstan/discussions/9301
+      - name: Cache PHPStan results
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.phpstan-result-cache-dir.outputs.PHPSTAN_CACHE_DIR }}
+          key: phpstan-result-cache-${{ github.run_id }} # always unique key - always writes a new cache
+          restore-keys: phpstan-result-cache- # same prefix but will always find the latest cache
+
+      - name: Run PHPStan
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./vendor/bin/phpstan --version
+          ./vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --error-format=raw --no-progress --memory-limit=4G | reviewdog -reporter=github-check -f=phpstan -level=error -filter-mode=nofilter -tee

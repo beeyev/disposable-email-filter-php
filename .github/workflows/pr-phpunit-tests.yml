@@ -1,0 +1,68 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: PHPUnit tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [master]
+    paths:
+      - "**.php"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  phpunit-tests:
+    name: PHPUnit Tests - PHP v${{ matrix.PHP_VERSION }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: |-
+      github.event.pull_request.draft == false
+      || !startsWith(github.head_ref, 'code-style-fix/')
+    strategy:
+      fail-fast: false
+      matrix:
+        PHP_VERSION: [ '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Prepare PHP Environment - PHP v${{ matrix.PHP_VERSION }}
+        uses: ./.github/actions/prepare-php-environment/
+        with:
+          PHP_VERSION: ${{ matrix.PHP_VERSION }}
+
+      - name: Unit Tests - PHP v${{ matrix.PHP_VERSION }}
+        run: |
+          php ./vendor/bin/phpunit --colors="always"
+
+  code-coverage-report:
+    name: Code Coverage Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: |-
+      github.event.pull_request.draft == false
+      || !startsWith(github.head_ref, 'code-style-fix/')
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Prepare PHP Environment
+        uses: ./.github/actions/prepare-php-environment/
+        with:
+          PHP_VERSION: '7.2'
+          USE_COVERAGE: 'yes'
+
+      - name: Unit Tests - Coverage Report
+        run: |
+          php ./vendor/bin/phpunit --coverage-clover ./coverage.xml --colors="always"
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          verbose: false

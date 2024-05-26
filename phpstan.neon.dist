@@ -1,0 +1,50 @@
+# Alexander Tebiev - https://github.com/beeyev
+
+includes:
+	- ./vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- ./vendor/phpstan/phpstan-strict-rules/rules.neon
+	- ./vendor/phpstan/phpstan-phpunit/extension.neon
+	- ./vendor/symplify/phpstan-rules/config/services/services.neon
+
+rules:
+	# "*Test.php" file cannot be located outside "Tests" namespace
+	- Symplify\PHPStanRules\Rules\CheckTypehintCallerTypeRule
+	# Interface have suffix of "Interface", trait have "Trait" suffix exclusively
+	- Symplify\PHPStanRules\Rules\Explicit\ExplicitClassPrefixSuffixRule
+	# Array method calls [$this, "method"] are not allowed. Use explicit method instead to help PhpStorm, PHPStan and Rector understand your code
+	- Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
+	# Multiple class/interface/trait is not allowed in single file
+	- Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
+	# Removing parent param type is forbidden
+	- Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
+	# New objects with "%s" name are overridden. This can lead to unwanted bugs, please pick a different name to avoid it.
+	- Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
+	# Use explicit names over dynamic ones
+	- Symplify\PHPStanRules\Rules\NoDynamicNameRule
+	# Use local named constant instead of inline string for regex to explain meaning by constant name
+	- Symplify\PHPStanRules\Rules\NoInlineStringRegexRule
+	# Anonymous variable in a %s->...() method call can lead to false dead methods. Make sure the variable type is known
+	- Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
+	# Anonymous variables in a "%s->..." property fetch can lead to false dead property. Make sure the variable type is known
+	- Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
+	# Use explicit return value over magic &reference
+	- Symplify\PHPStanRules\Rules\NoReferenceRule
+	# Returning false in non return bool class method. Use null instead
+	- Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
+	# Change "%s()" method visibility to "%s" to respect parent method visibility.
+	- Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
+	# Constant "%s" must be uppercase
+	- Symplify\PHPStanRules\Rules\UppercaseConstantRule
+	# Use explicit methods over array access on object
+	- Symplify\PHPStanRules\Rules\NoArrayAccessOnObjectRule
+
+parameters:
+	phpVersion: 70200
+	level: max
+	treatPhpDocTypesAsCertain: false
+	paths:
+		- ./src/
+		- ./tests/
+		- ./updater/
+	excludePaths:
+		- ./src/Adapters/Laravel/*

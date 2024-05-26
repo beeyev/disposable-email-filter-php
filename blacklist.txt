@@ -1,0 +1,7 @@
+# Local blacklist
+emailcbox.pro
+usatron.net
+newmail.online
+1secmail.ru
+likeance.com
+pelagius.net

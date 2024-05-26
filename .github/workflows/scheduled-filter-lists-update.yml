@@ -1,0 +1,58 @@
+# Alexander Tebiev - https://github.com/beeyev
+name: Automated filter list update
+
+on:
+  schedule:
+    - cron: "23 1 2 * *"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  filter-list-update:
+    name: Update disposable email filter lists
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      PHP_VERSION: '7.2'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Prepare Env Variables
+        uses: ./.github/actions/prepare-env-variables/
+        id: prepare-env-variables
+
+      - name: Prepare PHP Environment
+        uses: ./.github/actions/prepare-php-environment/
+        with:
+          PHP_VERSION: ${{ env.PHP_VERSION }}
+
+      - name: Disposable Email Filter List Updater
+        id: filter-list-updater
+        run: |
+          set +e
+          php ./updater/updater
+          echo "exit-code=$?" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Commit updated files
+        if: steps.filter-list-updater.outputs.exit-code == '0'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Automated filter list update - ${{ steps.prepare-env-variables.outputs.BUILD_DATE }}"
+          title: "Automated Filter List Update - ${{ steps.prepare-env-variables.outputs.BUILD_DATE }}"
+          branch: "filter-list-update/${{ steps.prepare-env-variables.outputs.BUILD_DATE_GIT_BRANCH }}"
+          delete-branch: true
+          labels: filter-list-update
+          body-path: ./updater/ReleaseNotesUpdater/release_notes.md

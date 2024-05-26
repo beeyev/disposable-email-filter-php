@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+/**
+ * @author Alexander Tebiev
+ *
+ * @see https://github.com/beeyev
+ *
+ * @internal
+ */
+declare(strict_types=1);
+
+use Beeyev\DisposableEmailFilter\Updater\UpdaterService;
+
+date_default_timezone_set('UTC');
+ini_set('assert.exception', '1');
+
+require __DIR__ . '/../vendor/autoload.php';
+
+(new UpdaterService())->execute();
