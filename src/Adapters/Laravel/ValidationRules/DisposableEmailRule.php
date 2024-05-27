@@ -5,6 +5,7 @@
 
 namespace Beeyev\DisposableEmailFilter\Adapters\Laravel\ValidationRules;
 
+use Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvider;
 use Beeyev\DisposableEmailFilter\Adapters\Laravel\Facades\DisposableEmail;
 use Illuminate\Contracts\Validation\ValidationRule;
 
@@ -12,17 +13,17 @@ final class DisposableEmailRule implements ValidationRule
 {
     public const NAME = 'disposable_email';
 
-    public const TRANSLATION_KEY = 'disposable-email-filter-php::validation.disposable_email_validation_message';
+    public const TRANSLATION_KEY = DisposableEmailFilterServiceProvider::PACKAGE_NAMESPACE . '::validation.disposable_email_validation_message';
 
     /**
      * Run the validation rule.
      *
-     * @param string                                                                $value
+     * @param string                                                                $emailAddress
      * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      */
-    public function validate(string $attribute, $value, \Closure $fail): void
+    public function validate(string $attribute, $emailAddress, \Closure $fail): void
     {
-        if (DisposableEmail::isDisposableEmailAddress($value)) {
+        if (self::isDisposable($emailAddress)) {
             $fail(self::TRANSLATION_KEY)->translate();
         }
     }
@@ -30,8 +31,12 @@ final class DisposableEmailRule implements ValidationRule
     /**
      * @see \Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvider::boot()
      */
-    public static function validatorExtension(string $emailAddress): bool
+    public static function isDisposable(string $emailAddress): bool
     {
-        return !DisposableEmail::isDisposableEmailAddress($emailAddress);
+        if (DisposableEmail::isEmailAddressValid($emailAddress)) {
+            return DisposableEmail::isDisposableEmailAddress($emailAddress);
+        }
+
+        return false;
     }
 }
