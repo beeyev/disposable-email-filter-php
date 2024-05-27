@@ -2,6 +2,7 @@
 /**
  * @author Alexander Tebiev - https://github.com/beeyev
  */
+
 namespace Beeyev\DisposableEmailFilter\Adapters\Laravel\ValidationRules;
 
 use Beeyev\DisposableEmailFilter\Adapters\Laravel\Facades\DisposableEmail;
@@ -26,6 +27,9 @@ final class DisposableEmailRule implements ValidationRule
         }
     }
 
+    /**
+     * @see \Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvider::boot()
+     */
     public static function validatorExtension(string $emailAddress): bool
     {
         return !DisposableEmail::isDisposableEmailAddress($emailAddress);

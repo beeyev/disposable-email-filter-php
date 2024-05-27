@@ -44,7 +44,7 @@ final class DisposableEmailFilterServiceProvider extends ServiceProvider
         //            $this->commands(UpdateDisposableDomainsCommand::class);
         //        }
         //        $this->publishes([
-        //            $this->config => config_path('disposable-email.php'),
+        //            $this->config => config_path('disposable-email-filter.php'),
         //        ], 'laravel-disposable-email');
 
         //        $this->publishes([
