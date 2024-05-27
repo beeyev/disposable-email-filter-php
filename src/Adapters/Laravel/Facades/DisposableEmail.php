@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \Beeyev\DisposableEmailFilter\DisposableEmailFilter
  */
-final class DisposableEmailFilterFacade extends Facade
+final class DisposableEmail extends Facade
 {
     protected static function getFacadeAccessor(): string
     {

@@ -52,7 +52,7 @@
                 "Beeyev\\DisposableEmailFilter\\Adapters\\Laravel\\DisposableEmailFilterServiceProvider"
             ],
             "aliases": {
-                "DisposableEmailFilter": "Beeyev\\DisposableEmailFilter\\Adapters\\Laravel\\Facades\\DisposableEmailFilterFacade"
+                "DisposableEmail": "Beeyev\\DisposableEmailFilter\\Adapters\\Laravel\\Facades\\DisposableEmail"
             }
         }
     },
