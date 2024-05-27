@@ -1,9 +1,10 @@
 <?php
-
+/**
+ * @author Alexander Tebiev - https://github.com/beeyev
+ */
 namespace Beeyev\DisposableEmailFilter\Adapters\Laravel\ValidationRules;
 
 use Beeyev\DisposableEmailFilter\Adapters\Laravel\Facades\DisposableEmail;
-use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 final class DisposableEmailRule implements ValidationRule
@@ -15,10 +16,10 @@ final class DisposableEmailRule implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  string $value
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param string                                                                $value
+     * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      */
-    public function validate(string $attribute, $value, Closure $fail): void
+    public function validate(string $attribute, $value, \Closure $fail): void
     {
         if (DisposableEmail::isDisposableEmailAddress($value)) {
             $fail(self::TRANSLATION_KEY)->translate();
