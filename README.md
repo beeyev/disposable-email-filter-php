@@ -1,7 +1,6 @@
 # 🗑 Disposable email detection
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/beeyev/disposable-email-filter-php/php.svg)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 
 
