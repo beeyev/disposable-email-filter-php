@@ -22,6 +22,9 @@
         <whitelist>
             <directory suffix=".php">./src/</directory>
             <directory suffix=".php">./updater/</directory>
+            <exclude>
+                <directory suffix=".php">./src/Adapters/Laravel/</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>

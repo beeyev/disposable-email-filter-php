@@ -46,6 +46,16 @@
             "Beeyev\\DisposableEmailFilter\\Updater\\": "updater/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Beeyev\\DisposableEmailFilter\\Adapters\\Laravel\\DisposableEmailFilterServiceProvider"
+            ],
+            "aliases": {
+                "DisposableEmail": "Beeyev\\DisposableEmailFilter\\Adapters\\Laravel\\Facades\\DisposableEmail"
+            }
+        }
+    },
     "config": {
         "sort-packages": true
     }

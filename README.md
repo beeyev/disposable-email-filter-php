@@ -1,10 +1,9 @@
-# 🗑 Disposable email detection
+# 🗑 Disposable email detection 22
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/beeyev/disposable-email-filter-php/php.svg)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 
-
-PHP package that detects disposable (temporary/throwaway/fake) email addresses.  
+PHP package that detects disposable (temporary/throwaway/fake) email addresses. It is framework-agnostic and has no dependencies, but includes support for Laravel.
 It validates email addresses to ensure they are genuine,
 which is useful for managing account sign-ups and assessing the number of legitimate email addresses in your system.
 This tool also helps to avoid communication errors and blocks spam addresses.  
@@ -15,6 +14,8 @@ The lookup is superfast because disposable email domains are stored locally as a
 Supported PHP versions: `v7.2 - v8.3`
 
 ## Installation and Usage examples
+
+> Read below for Laravel specific instructions.
 
 Require this package with composer using the following command:
 
@@ -107,14 +108,72 @@ if ($disposableEmailFilter->isEmailAddressValid($emailAddress)) {
     $disposableEmailFilter->isDisposableEmailAddress($emailAddress);
 }
 ```
+
+## Laravel specific usage
+
+This package includes a service provider and form validation rule for Laravel.
+
+### Install the package (Laravel)
+
+```bash
+composer require beeyev/disposable-email-filter-php
+```
+
+The package will be automatically registered using Laravel auto-discovery mechanism.  
+But if you need to do it manually, you can add the following line to the `providers` array in the `config/app.php` file:
+
+```php
+Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvider::class,
+```
+
+### Form validation (Laravel)
+
+Use validation rule `disposable_email` or object `new DisposableEmailRule()`,
+to check that specific field does not contain a disposable email address.
+
+> ❗ Place it after the email validator to ensure that only valid emails are processed.
+
+Example:
+
+```php
+// Using validation rule name:
+'email_field' => 'required|email|disposable_email',
+
+// Or using a validation rule object:
+'email_field' => ['email', new DisposableEmailRule()],
+```
+
+### Using facades (Laravel)
+
+You can use the `DisposableEmail` facade to access the `DisposableEmailFilter` instance:
+
+```php
+use Beeyev\DisposableEmailFilter\Adapters\Laravel\Facades\DisposableEmail;
+
+DisposableEmail::isEmailAddressValid('foo@fakemail.com');
+```
+
+### Config file and translations (Laravel)
+
+Optionally, you can publish the config file and translations to customize the package behavior:
+
+```bash
+php artisan vendor:publish --tag=disposable-email-filter
+```
+
+This command will create a `disposable-email-filter.php` config file in the `config` directory
+and translation files in the `lang/vendor/disposable-email-filter` directory.
+
 ## Updating
 
 Since the list of disposable email domains is regularly updated, it is important to keep the package up to date.  
 A new `PATCH` version of the package is [released](https://github.com/beeyev/disposable-email-filter-php/releases/) whenever the list is updated.  
-These updates are safe and non-breaking, allowing you to update the package via this composer command:  
+These updates are safe and non-breaking, allowing you to update the package via this composer command:
+
 ```bash
 composer update beeyev/disposable-email-filter-php
 ```
+
 > You can run this command every time in CI/CD pipelines before the project is deployed.
 
 ## Contribution
