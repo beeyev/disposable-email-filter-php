@@ -40,7 +40,7 @@ final class DisposableEmailFilterServiceProvider extends ServiceProvider
             ], self::PACKAGE_NAMESPACE);
         }
 
-        $validationFactory->extend(DisposableEmailRule::NAME, static function (string $attribute, string $emailAddress) {
+        $validationFactory->extend(DisposableEmailRule::NAME, static function (string $attribute, string $emailAddress): bool {
             return !DisposableEmailRule::isDisposable($emailAddress);
         }, $translator->get(DisposableEmailRule::TRANSLATION_KEY));
 
@@ -57,8 +57,8 @@ final class DisposableEmailFilterServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(self::CONFIG_PATH, self::PACKAGE_NAMESPACE);
 
         $this->app->singleton(DisposableEmailFilter::class, static function (Application $app): DisposableEmailFilter {
-            /** @var Repository $config */
             $config = $app->get('config');
+            assert($config instanceof Repository);
 
             if (!isset($config->get(self::PACKAGE_NAMESPACE)['whitelist'])) {
                 throw new \RuntimeException(self::PACKAGE_NAMESPACE . ': Whitelist array is not defined in configuration file or configuration file is not loaded');

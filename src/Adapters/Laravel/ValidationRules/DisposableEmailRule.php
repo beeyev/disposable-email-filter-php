@@ -28,9 +28,6 @@ final class DisposableEmailRule implements ValidationRule
         }
     }
 
-    /**
-     * @see \Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvider::boot()
-     */
     public static function isDisposable(string $emailAddress): bool
     {
         if (DisposableEmail::isEmailAddressValid($emailAddress)) {
