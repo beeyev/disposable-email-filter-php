@@ -18,7 +18,7 @@ final class DisposableEmailRule implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param string                                                                $emailAddress
+     * @param string $emailAddress
      * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      */
     public function validate(string $attribute, $emailAddress, \Closure $fail): void
