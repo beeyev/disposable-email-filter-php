@@ -17,6 +17,13 @@ final class DisposableEmailDomainsTest extends AbstractTestCase
 {
     public const DISPOSABLE_EMAIL_DOMAINS_FILE_PATH = __DIR__ . '/DisposableEmailDomainsList.php.dummy_data';
 
+    public function testUpdatedDateTimeCanBeRetrieved(): void
+    {
+        $disposableEmailDomains = new DisposableEmailDomains(self::DISPOSABLE_EMAIL_DOMAINS_FILE_PATH);
+
+        self::assertEquals(new \DateTimeImmutable('2024-05-29 12:24:39.562100', new \DateTimeZone('UTC')), $disposableEmailDomains->getUpdatedDateTime());
+    }
+
     public function testDisposableEmailDomainCanBeChecked(): void
     {
         $disposableEmailDomains = new DisposableEmailDomains(self::DISPOSABLE_EMAIL_DOMAINS_FILE_PATH);
