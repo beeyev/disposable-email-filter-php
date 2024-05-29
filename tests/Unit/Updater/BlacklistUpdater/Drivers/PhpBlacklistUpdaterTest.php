@@ -18,6 +18,7 @@ final class PhpBlacklistUpdaterTest extends AbstractTestCase
 {
     public function testUpdate(): void
     {
+        $currentDate = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
         $contentsManipulatorTestHelper = new ContentsManipulatorTestHelper('');
         $phpBlacklistStyleFixerCodeChecker = $this->createMock(PhpBlacklistStyleFixerCodeCheckerInterface::class);
         $phpBlacklistStyleFixerCodeChecker->expects(self::once())->method('fixAndCheck');
@@ -27,6 +28,10 @@ final class PhpBlacklistUpdaterTest extends AbstractTestCase
         $result = eval(trim($contentsManipulatorTestHelper->get(), '<?php ?>'));
 
         self::assertIsArray($result);
-        self::assertSame(['example1.com' => true, 'example2.com' => true], $result);
+        self::assertSame(['example1.com' => true, 'example2.com' => true], $result['disposable_email_domains']);
+
+        self::assertInstanceOf(\DateTimeImmutable::class, $result['updated_at']);
+        self::assertEqualsWithDelta($currentDate, $result['updated_at'], 1);
+        self::assertSame('UTC', $result['updated_at']->getTimezone()->getName());
     }
 }

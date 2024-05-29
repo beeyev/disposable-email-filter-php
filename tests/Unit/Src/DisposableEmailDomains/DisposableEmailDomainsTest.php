@@ -44,12 +44,30 @@ final class DisposableEmailDomainsTest extends AbstractTestCase
         $disposableEmailDomains->isDisposableEmailDomain('abc1.com');
     }
 
-    public function testDisposableEmailDomainThrowsExceptionIfListEmpty(): void
+    public function testDisposableEmailDomainThrowsExceptionIfFileIsEmpty(): void
     {
         $this->expectException(DisposableEmailFilterException::class);
         $this->expectExceptionMessageMatches('/^The disposable email domains list is incorrect or empty:/');
 
         $disposableEmailDomains = new DisposableEmailDomains(__DIR__ . '/DisposableEmailDomainsList.php.empty_data');
         $disposableEmailDomains->isDisposableEmailDomain('abc1.com');
+    }
+
+    public function testDisposableEmailDomainThrowsExceptionIfNoDomainsDefined(): void
+    {
+        $this->expectException(DisposableEmailFilterException::class);
+        $this->expectExceptionMessageMatches("/^The list of disposable email domains 'disposable_email_domains' is incorrect or missing in the disposable email domains file:/");
+
+        $disposableEmailDomains = new DisposableEmailDomains(__DIR__ . '/DisposableEmailDomainsList.php.data_no_domains');
+        $disposableEmailDomains->isDisposableEmailDomain('abc1.com');
+    }
+
+    public function testDisposableEmailDomainThrowsExceptionIfNoUpdatedDateTimeDefined(): void
+    {
+        $this->expectException(DisposableEmailFilterException::class);
+        $this->expectExceptionMessageMatches("/^The updated date time value 'updated_at' is incorrect or missing in the disposable email domains file:/");
+
+        $disposableEmailDomains = new DisposableEmailDomains(__DIR__ . '/DisposableEmailDomainsList.php.data_updated_datetime');
+        $disposableEmailDomains->getUpdatedDateTime();
     }
 }

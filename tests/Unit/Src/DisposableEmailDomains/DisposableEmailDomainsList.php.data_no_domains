@@ -9,9 +9,5 @@ return [
         'timezone' => 'UTC',
     ]),
     'disposable_email_domains' => [
-       'abc1.com' => true,
-       'abc2.com' => true,
-       'test1.nl' => true,
-       'test2.nl' => true,
     ],
 ];

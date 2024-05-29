@@ -78,9 +78,16 @@ final class PhpBlacklistStyleFixerCodeChecker implements PhpBlacklistStyleFixerC
 
     private function check(): void
     {
-        $array = require $this->filePath;
-        if (!is_array($array) || count($array) === 0) {
-            throw new \RuntimeException('Given file does not contain expected php array.');
+        $result = require $this->filePath;
+
+        assert(is_array($result));
+        assert(isset($result['updated_at']));
+        assert(isset($result['disposable_email_domains']));
+
+        assert($result['updated_at'] instanceof \DateTimeImmutable);
+
+        if (count($result['disposable_email_domains']) === 0) {
+            throw new \RuntimeException('Given file does not contain any data.');
         }
     }
 }

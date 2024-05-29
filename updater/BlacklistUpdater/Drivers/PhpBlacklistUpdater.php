@@ -52,7 +52,12 @@ final class PhpBlacklistUpdater implements BlacklistUpdaterInterface
             return true;
         }, $domains);
 
-        $currentDate = date('Y-m-d H:i:s (T)');
+        $currentDate = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+
+        $returnData = [
+            'updated_at' => $currentDate,
+            'disposable_email_domains' => $domains,
+        ];
 
         // @todo: replace with a proper template engine
         $contents = [
@@ -61,9 +66,9 @@ final class PhpBlacklistUpdater implements BlacklistUpdaterInterface
             ' * @author Alexander Tebiev - https://github.com/beeyev',
             ' * @link https://github.com/beeyev/fake-email-filter',
             ' *',
-            " * File updated at: {$currentDate}",
+            " * File updated at: {$currentDate->format('Y-m-d H:i:s (T)')}",
             ' */',
-            'return ' . var_export($domains, true) . ';',
+            'return ' . var_export($returnData, true) . ';',
         ];
 
         return implode(PHP_EOL, $contents);

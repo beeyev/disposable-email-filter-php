@@ -3,11 +3,7 @@
  * Test
  */
 return [
-    'updated_at' => DateTimeImmutable::__set_state([
-        'date' => '2024-05-29 12:24:39.562100',
-        'timezone_type' => 3,
-        'timezone' => 'UTC',
-    ]),
+    'updated_at' => null,
     'disposable_email_domains' => [
        'abc1.com' => true,
        'abc2.com' => true,
