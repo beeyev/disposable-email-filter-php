@@ -22,7 +22,7 @@ final class DisposableEmailDomainsTest extends AbstractTestCase
         $disposableEmailDomains = new DisposableEmailDomains(self::DISPOSABLE_EMAIL_DOMAINS_FILE_PATH);
 
         $currentDateTime = new \DateTimeImmutable('2024-05-29 12:24:39.562100', new \DateTimeZone('UTC'));
-        self::assertSame($currentDateTime, $disposableEmailDomains->getUpdatedDateTime());
+        self::assertEquals($currentDateTime, $disposableEmailDomains->getUpdatedDateTime());
         self::assertSame('UTC', $disposableEmailDomains->getUpdatedDateTime()->getTimezone()->getName());
     }
 
