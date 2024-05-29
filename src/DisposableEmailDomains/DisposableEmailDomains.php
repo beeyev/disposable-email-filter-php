@@ -79,36 +79,38 @@ final class DisposableEmailDomains
      */
     private function lazyLoadDomainsData(): void
     {
-        if ($this->disposableEmailDomains === null) {
-            if (!is_file($this->disposableEmailDomainsFilePath) || !is_readable($this->disposableEmailDomainsFilePath)) {
-                throw new DisposableEmailFilterException("The disposable email domains file is not readable or does not exist: `{$this->disposableEmailDomainsFilePath}`");
-            }
+        if ($this->disposableEmailDomains !== null) {
+            return;
+        }
 
-            /**
-             * @var array{
-             *        'updated_at': \DateTimeImmutable,
-             *        'disposable_email_domains': non-empty-array<non-empty-string, true>
-             *     } $domainsData
-             */
-            $domainsData = require $this->disposableEmailDomainsFilePath;
+        if (!is_file($this->disposableEmailDomainsFilePath) || !is_readable($this->disposableEmailDomainsFilePath)) {
+            throw new DisposableEmailFilterException("The disposable email domains file is not readable or does not exist: `{$this->disposableEmailDomainsFilePath}`");
+        }
 
-            if (!is_array($domainsData) || count($domainsData) === 0) {
-                throw new DisposableEmailFilterException("The disposable email domains list is incorrect or empty: `{$this->disposableEmailDomainsFilePath}`");
-            }
+        /**
+         * @var array{
+         *        'updated_at': \DateTimeImmutable,
+         *        'disposable_email_domains': non-empty-array<non-empty-string, true>
+         *     } $domainsData
+         */
+        $domainsData = require $this->disposableEmailDomainsFilePath;
 
-            if (!isset($domainsData['updated_at']) || !$domainsData['updated_at'] instanceof \DateTimeImmutable) {
-                throw new DisposableEmailFilterException("The updated date time value 'updated_at' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
-            }
+        if (!is_array($domainsData) || count($domainsData) === 0) {
+            throw new DisposableEmailFilterException("The disposable email domains list is incorrect or empty: `{$this->disposableEmailDomainsFilePath}`");
+        }
 
-            if (
+        if (!isset($domainsData['updated_at']) || !$domainsData['updated_at'] instanceof \DateTimeImmutable) {
+            throw new DisposableEmailFilterException("The updated date time value 'updated_at' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
+        }
+
+        if (
                 !isset($domainsData['disposable_email_domains'])
                 || !is_array($domainsData['disposable_email_domains'])
                 || count($domainsData['disposable_email_domains']) === 0) {
-                throw new DisposableEmailFilterException("The list of disposable email domains 'disposable_email_domains' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
-            }
-
-            $this->updatedDateTime = $domainsData['updated_at'];
-            $this->disposableEmailDomains = $domainsData['disposable_email_domains'];
+            throw new DisposableEmailFilterException("The list of disposable email domains 'disposable_email_domains' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
         }
+
+        $this->updatedDateTime = $domainsData['updated_at'];
+        $this->disposableEmailDomains = $domainsData['disposable_email_domains'];
     }
 }
