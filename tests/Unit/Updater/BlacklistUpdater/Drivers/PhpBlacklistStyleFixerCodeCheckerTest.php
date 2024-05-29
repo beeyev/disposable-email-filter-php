@@ -53,7 +53,7 @@ final class PhpBlacklistStyleFixerCodeCheckerTest extends AbstractTestCase
         $phpBlacklistStyleFixerCodeChecker = new PhpBlacklistStyleFixerCodeChecker($this->tempFilePath);
 
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Given file does not contain expected php array.');
+        $this->expectExceptionMessage('Given file does not contain any data.');
         $phpBlacklistStyleFixerCodeChecker->fixAndCheck();
     }
 

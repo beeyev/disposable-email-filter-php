@@ -17,6 +17,9 @@ final class DisposableEmailDomains
     /** @var non-empty-array<non-empty-string, true>|null */
     private $disposableEmailDomains;
 
+    /** @var \DateTimeImmutable */
+    private $updatedDateTime;
+
     /**
      * @param non-empty-string $disposableEmailDomainsFilePath The path to the file with the list of disposable email domains
      */
@@ -24,6 +27,18 @@ final class DisposableEmailDomains
     {
         assert($disposableEmailDomainsFilePath !== '', 'The disposable email domains file path must not be empty.');
         $this->disposableEmailDomainsFilePath = $disposableEmailDomainsFilePath;
+    }
+
+    /**
+     * Returns the date and time when the list of disposable email domains was last updated.
+     *
+     * @throws DisposableEmailFilterException If the disposable email domains file is not readable, or the list is incorrect or empty
+     */
+    public function getUpdatedDateTime(): \DateTimeImmutable
+    {
+        $this->lazyLoadDomainsData();
+
+        return $this->updatedDateTime;
     }
 
     /**
@@ -36,17 +51,7 @@ final class DisposableEmailDomains
      */
     private function getDomains(): array
     {
-        if ($this->disposableEmailDomains === null) {
-            if (!is_file($this->disposableEmailDomainsFilePath) || !is_readable($this->disposableEmailDomainsFilePath)) {
-                throw new DisposableEmailFilterException("The disposable email domains file is not readable or does not exist: `{$this->disposableEmailDomainsFilePath}`");
-            }
-
-            $this->disposableEmailDomains = require $this->disposableEmailDomainsFilePath;
-
-            if (!is_array($this->disposableEmailDomains) || count($this->disposableEmailDomains) === 0) {
-                throw new DisposableEmailFilterException("The disposable email domains list is incorrect or empty: `{$this->disposableEmailDomainsFilePath}`");
-            }
-        }
+        $this->lazyLoadDomainsData();
 
         return $this->disposableEmailDomains; // @phpstan-ignore return.type
     }
@@ -67,5 +72,45 @@ final class DisposableEmailDomains
         $domainName = strtolower($domainName);
 
         return isset($this->getDomains()[$domainName]);
+    }
+
+    /**
+     * @throws DisposableEmailFilterException If the disposable email domains file is not readable, or the list is incorrect or empty
+     */
+    private function lazyLoadDomainsData(): void
+    {
+        if ($this->disposableEmailDomains !== null) {
+            return;
+        }
+
+        if (!is_file($this->disposableEmailDomainsFilePath) || !is_readable($this->disposableEmailDomainsFilePath)) {
+            throw new DisposableEmailFilterException("The disposable email domains file is not readable or does not exist: `{$this->disposableEmailDomainsFilePath}`");
+        }
+
+        /**
+         * @var array{
+         *        'updated_at': \DateTimeImmutable,
+         *        'disposable_email_domains': non-empty-array<non-empty-string, true>
+         *     } $domainsData
+         */
+        $domainsData = require $this->disposableEmailDomainsFilePath;
+
+        if (!is_array($domainsData) || count($domainsData) === 0) {
+            throw new DisposableEmailFilterException("The disposable email domains list is incorrect or empty: `{$this->disposableEmailDomainsFilePath}`");
+        }
+
+        if (!isset($domainsData['updated_at']) || !$domainsData['updated_at'] instanceof \DateTimeImmutable) {
+            throw new DisposableEmailFilterException("The updated date time value 'updated_at' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
+        }
+
+        if (
+                !isset($domainsData['disposable_email_domains'])
+                || !is_array($domainsData['disposable_email_domains'])
+                || count($domainsData['disposable_email_domains']) === 0) {
+            throw new DisposableEmailFilterException("The list of disposable email domains 'disposable_email_domains' is incorrect or missing in the disposable email domains file: `{$this->disposableEmailDomainsFilePath}`");
+        }
+
+        $this->updatedDateTime = $domainsData['updated_at'];
+        $this->disposableEmailDomains = $domainsData['disposable_email_domains'];
     }
 }

@@ -18,11 +18,14 @@ final class PhpBlacklistUpdaterDummyData
  * Lorem ipsum dolor sit amet
  */
 return array(
-    '0-00.usa.cc'    => true,
+    'updated_at' => new \DateTimeImmutable('now', new \DateTimeZone('UTC')),
+    'disposable_email_domains' => array(
+        '0-00.usa.cc'    => true,
     '0-30-24.com' =>   true,
 
     '0-attorney.com' => true,
     '0-mail.com' => true,
+    ),
 );
 EOD;
     }
@@ -42,7 +45,10 @@ EOD;
     {
         return <<<'EOD'
 <?php
-return [];
+return array(
+    'updated_at' => new \DateTimeImmutable('now', new \DateTimeZone('UTC')),
+    'disposable_email_domains' => [],
+);
 EOD;
     }
 }

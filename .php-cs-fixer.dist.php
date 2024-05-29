@@ -62,6 +62,7 @@ return $config
         PhpCsFixerCustomFixers\Fixer\PhpdocSelfAccessorFixer::name() => true,
         // Calls to `PHPUnit\Framework\TestCase` static methods must all be of the same type, either `$this->`, `self::` or `static::`.
         'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'php_unit_strict' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
