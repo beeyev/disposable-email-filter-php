@@ -15,6 +15,7 @@ Supported PHP versions: `v7.2 - v8.3`
 
 ## Installation and Usage examples
 
+> [!NOTE]
 > Read below for Laravel specific instructions.
 
 Require this package with composer using the following command:
@@ -131,6 +132,7 @@ Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvid
 Use validation rule `disposable_email` or object `new DisposableEmailRule()`,
 to check that specific field does not contain a disposable email address.
 
+> [!NOTE]
 > ❗ Place it after the email validator to ensure that only valid emails are processed.
 
 Example:
