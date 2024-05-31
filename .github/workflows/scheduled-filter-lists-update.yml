@@ -3,7 +3,7 @@ name: Automated filter list update
 
 on:
   schedule:
-    - cron: "13 21 */3 * *"
+    - cron: "13 11 */3 * *"
 
   workflow_dispatch:
 
