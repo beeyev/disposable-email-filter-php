@@ -9,7 +9,6 @@ return $config
     ->registerCustomFixers(new PhpCsFixerCustomFixers\Fixers())
     ->setRules([
         '@PhpCsFixer' => true,
-        '@PhpCsFixer:risky' => true,
         '@PSR12' => true,
         '@PSR12:risky' => true,
         // Write conditions in Yoda style (`true`), non-Yoda style (`['equal' => false, 'identical' => false, 'less_and_greater' => false]`) or ignore those conditions (`null`) based on configuration.
