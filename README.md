@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/beeyev/disposable-email-filter-php/php.svg)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 
-![Disposable-email-detection](https://github.com/beeyev/disposable-email-filter-php/assets/326840/5c516810-c334-44c8-9ba6-052eae8eb07f)
+![Disposable-email-detection](https://cdn.jsdelivr.net/gh/beeyev/disposable-email-filter-php@static-files/Docs/Images/readme_header.png)
 
 PHP package that detects disposable (temporary/throwaway/fake) email addresses. It is framework-agnostic and has no dependencies, but includes support for Laravel.
 It validates email addresses to ensure they are genuine,
