@@ -9,9 +9,9 @@ use Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServicePr
 use Beeyev\DisposableEmailFilter\Adapters\Laravel\Facades\DisposableEmail;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-final class DisposableEmailRule implements ValidationRule
+final class NotDisposableEmail implements ValidationRule
 {
-    public const NAME = 'disposable_email';
+    public const RULE_NAME = 'not_disposable_email';
 
     public const TRANSLATION_KEY = DisposableEmailFilterServiceProvider::PACKAGE_NAMESPACE . '::validation.disposable_email_validation_message';
 

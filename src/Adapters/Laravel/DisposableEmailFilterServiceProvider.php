@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Beeyev\DisposableEmailFilter\Adapters\Laravel;
 
-use Beeyev\DisposableEmailFilter\Adapters\Laravel\ValidationRules\DisposableEmailRule;
+use Beeyev\DisposableEmailFilter\Adapters\Laravel\ValidationRules\NotDisposableEmail;
 use Beeyev\DisposableEmailFilter\DisposableEmailFilter;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
@@ -40,9 +40,9 @@ final class DisposableEmailFilterServiceProvider extends ServiceProvider
             ], self::PACKAGE_NAMESPACE);
         }
 
-        $validationFactory->extend(DisposableEmailRule::NAME, static function (string $attribute, string $emailAddress): bool {
-            return !DisposableEmailRule::isDisposable($emailAddress);
-        }, $translator->get(DisposableEmailRule::TRANSLATION_KEY));
+        $validationFactory->extend(NotDisposableEmail::RULE_NAME, static function (string $attribute, string $emailAddress): bool {
+            return !NotDisposableEmail::isDisposable($emailAddress);
+        }, $translator->get(NotDisposableEmail::TRANSLATION_KEY));
 
         //        AboutCommand::add('My Package', static function (): array {
         //            return ['Version' => '1.0.0'];

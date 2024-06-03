@@ -132,7 +132,7 @@ Beeyev\DisposableEmailFilter\Adapters\Laravel\DisposableEmailFilterServiceProvid
 
 ### Form validation (Laravel)
 
-Use validation rule `disposable_email` or object `new DisposableEmailRule()`,
+Use validation rule `not_disposable_email` or object `new NotDisposableEmail()`,
 to check that specific field does not contain a disposable email address.
 
 > [!NOTE]
@@ -142,10 +142,10 @@ Example:
 
 ```php
 // Using validation rule name:
-'email_field' => 'required|email|disposable_email',
+'email_field' => 'required|email|not_disposable_email',
 
 // Or using a validation rule object:
-'email_field' => ['email', new DisposableEmailRule()],
+'email_field' => ['email', new NotDisposableEmail()],
 ```
 
 ### Using facades (Laravel)
