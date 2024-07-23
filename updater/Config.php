@@ -17,6 +17,7 @@ final class Config
         'github.com/7c/fakefilter' => 'https://raw.githubusercontent.com/7c/fakefilter/main/txt/data.txt',
         'github.com/FGRibreau/mailchecker' => 'https://raw.githubusercontent.com/FGRibreau/mailchecker/master/list.txt',
         'github.com/disposable-email-domains/disposable-email-domains' => 'https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/master/disposable_email_blocklist.conf',
+        'github.com/unkn0w/disposable-email-domain-list' => 'https://raw.githubusercontent.com/unkn0w/disposable-email-domain-list/main/domains.txt',
     ];
 
     public const LAST_SYNCED_BLACKLISTS_DATA_FILEPATH = __DIR__ . '/ChangelogTracker/last-synced-blacklists-data.json';
