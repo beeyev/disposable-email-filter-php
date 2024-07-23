@@ -192,7 +192,6 @@ Alternatively, you can [open an issue](https://github.com/beeyev/disposable-emai
 - [`7c/fakefilter`](https://github.com/7c/fakefilter)
 - [`FGRibreau/mailchecker`](https://github.com/FGRibreau/mailchecker)
 - [`disposable-email-domains`](https://github.com/disposable-email-domains/disposable-email-domains)
-- [`unkn0w/disposable-email-domain-list`](https://github.com/unkn0w/disposable-email-domain-list)
 
 > Local blacklist and whitelist are stored in the [blacklist.txt](https://github.com/beeyev/disposable-email-filter-php/blob/master/blacklist.txt) and [whitelist.txt](https://github.com/beeyev/disposable-email-filter-php/blob/master/whitelist.txt) files.
 
