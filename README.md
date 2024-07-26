@@ -3,20 +3,17 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beeyev/disposable-email-filter-php)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 [![Supported PHP Versions](https://img.shields.io/packagist/dependency-v/beeyev/disposable-email-filter-php/php.svg)](https://packagist.org/packages/beeyev/disposable-email-filter-php)
 
-![Disposable-email-detection](https://cdn.jsdelivr.net/gh/beeyev/disposable-email-filter-php@static-files/Docs/Images/readme_header.png)
+<p align="center"><a href="https://github.com/beeyev/disposable-email-filter-php"><img src="https://cdn.jsdelivr.net/gh/beeyev/disposable-email-filter-php@static-files/Docs/Images/readme_header.png"></a></p>
 
 PHP package that detects disposable (temporary/throwaway/fake) email addresses. It is framework-agnostic and has no dependencies, but includes support for Laravel.
-It validates email addresses to ensure they are genuine,
-which is useful for managing account sign-ups and assessing the number of legitimate email addresses in your system.
+It validates email addresses to ensure they are genuine, which is useful for managing account sign-ups and assessing the number of legitimate email addresses in your system.  
 This tool also helps to avoid communication errors and blocks spam addresses.  
-The lookup is superfast because disposable email domains are stored locally as a native php hash set.
 
-> The list of disposable email domains is regularly updated automatically from trusted external sources.
+🚀 The lookup is superfast because disposable email domains are stored locally using a native PHP hash set..
 
-Supported PHP versions: `v7.2 - v8.3`
+🚡 The list of disposable email domains is regularly updated automatically from trusted external sources.
 
-
-## Installation and Usage examples
+## 📦 Installation and Usage examples
 
 > [!NOTE]
 > Read below for Laravel specific instructions.
@@ -40,7 +37,7 @@ use Beeyev\DisposableEmailFilter\DisposableEmailFilter;
 $disposableEmailFilter = new DisposableEmailFilter();
 
 // Check if email address is disposable
-$disposableEmailFilter->isDisposableEmailAddress('ostap@gmail.com'); // false
+$disposableEmailFilter->isDisposableEmailAddress('ostap@gmail.com');     // false
 $disposableEmailFilter->isDisposableEmailAddress('john@tempmailer.com'); // true
 ```
 
@@ -62,10 +59,10 @@ $disposableEmailFilter->blacklistedDomains()->addMultiple(['mailinator.com', '10
 // Add one domain to whitelist
 $disposableEmailFilter->whitelistedDomains()->add('tempmailer.com');
 
-$disposableEmailFilter->isDisposableEmailAddress('john@tempmailer.com'); // false (because it's whitelisted now)
-$disposableEmailFilter->isDisposableEmailAddress('john@mailinator.com'); // true
+$disposableEmailFilter->isDisposableEmailAddress('john@tempmailer.com');    // false (because it's whitelisted now)
+$disposableEmailFilter->isDisposableEmailAddress('john@mailinator.com');    // true
 $disposableEmailFilter->isDisposableEmailAddress('john@10minute-mail.org'); // true
-$disposableEmailFilter->isDisposableEmailAddress('john@gmail.com'); // false
+$disposableEmailFilter->isDisposableEmailAddress('john@gmail.com');         // false
 ```
 
 It is also possible to add blacklisted and whitelisted domains using constructor dependency:
@@ -199,7 +196,7 @@ Alternatively, you can [open an issue](https://github.com/beeyev/disposable-emai
 
 Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/beeyev/disposable-email-filter-php/issues).
 
-## License
+## © License
 
 The MIT License (MIT). Please see [License File](https://github.com/beeyev/disposable-email-filter-php/blob/master/LICENSE.md) for more information.
 
