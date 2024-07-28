@@ -265,6 +265,7 @@ meta.ua
 email.ua
 bigmir.net
 freemail.ua
+simplelogin.com
 
 # https://github.com/disposable-email-domains/
 123mail.org
