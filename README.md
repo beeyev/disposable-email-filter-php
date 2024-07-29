@@ -9,7 +9,7 @@ PHP package that detects disposable (temporary/throwaway/fake) email addresses. 
 It validates email addresses to ensure they are genuine, which is useful for managing account sign-ups and assessing the number of legitimate email addresses in your system.  
 This tool also helps to avoid communication errors and blocks spam addresses.  
 
-🚀 The lookup is superfast because disposable email domains are stored locally using a native PHP hash set..
+🚀 The lookup is superfast `O(1)` because disposable email domains are stored locally using a native PHP hash set..
 
 🚡 The list of disposable email domains is regularly updated automatically from trusted external sources.
 
