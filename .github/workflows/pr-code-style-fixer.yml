@@ -63,7 +63,7 @@ jobs:
 
       - name: Commit changed files
         if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           add-paths: |
             *.php
