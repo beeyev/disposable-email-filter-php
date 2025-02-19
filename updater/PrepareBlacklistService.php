@@ -9,6 +9,7 @@ namespace Beeyev\DisposableEmailFilter\Updater;
 use Beeyev\DisposableEmailFilter\Updater\DataManipulation\ContentsManipulatorInterface;
 use Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistsDto;
 use Beeyev\DisposableEmailFilter\Updater\Support\DomainsExtractor;
+use Beeyev\DisposableEmailFilter\Updater\Support\Utils;
 
 /** @internal */
 final class PrepareBlacklistService
@@ -42,9 +43,7 @@ final class PrepareBlacklistService
         $result = array_diff($blacklistData, $whitelistData);
         assert(count($result) > 0);
 
-        natsort($result);
-
-        return array_values($result);
+        return Utils::naturalSort($result);
     }
 
     /**

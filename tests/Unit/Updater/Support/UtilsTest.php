@@ -70,4 +70,59 @@ final class UtilsTest extends AbstractTestCase
         $hash = Utils::hash('lorem ipsum dolor sit amet');
         self::assertSame('201730d4278e576b25515bd90c6072d3', $hash);
     }
+
+    /**
+     * @dataProvider domainProvider
+     */
+    public function testNaturalSortOrdersDomainsCorrectly(array $input, array $expected): void
+    {
+        $result = Utils::naturalSort($input);
+        self::assertSame($expected, $result);
+    }
+
+    public function domainProvider(): array
+    {
+        return [
+            'Numerical sorting with leading zeros' => [
+                ['47gmail.com', '047gmail.com', '47bmt.com'],
+                ['47bmt.com', '047gmail.com', '47gmail.com'],
+            ],
+            'Mixed numerical/alpha segments' => [
+                ['img12.com', 'img2.com', 'img1.com'],
+                ['img1.com', 'img2.com', 'img12.com'],
+            ],
+            'Natural equivalence with string fallback' => [
+                ['apple01.com', 'apple1.com', 'apple001.com'],
+                ['apple001.com', 'apple01.com', 'apple1.com'],
+            ],
+            'Different TLDs with same name' => [
+                ['test.net', 'test.com', 'test.org'],
+                ['test.com', 'test.net', 'test.org'],
+            ],
+            'Complex domain patterns' => [
+                ['1a.example.com', 'a1.example.com', '01a.example.com'],
+                ['01a.example.com', '1a.example.com', 'a1.example.com'],
+            ],
+            'Subdomain sorting' => [
+                ['blog.47gmail.com', '047gmail.com', 'mail.47gmail.com'],
+                ['047gmail.com', 'blog.47gmail.com', 'mail.47gmail.com'],
+            ],
+            'Numerical TLDs (uncommon but valid)' => [
+                ['example.42', 'example.7', 'example.007'],
+                ['example.007', 'example.7', 'example.42'],
+            ],
+            'Empty' => [
+                [],
+                [],
+            ],
+            'Single' => [
+                ['single.com'],
+                ['single.com'],
+            ],
+            'Duplicates' => [
+                ['dup.com', 'dup.com'],
+                ['dup.com', 'dup.com'],
+            ],
+        ];
+    }
 }

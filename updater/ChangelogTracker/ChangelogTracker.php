@@ -12,6 +12,7 @@ use Beeyev\DisposableEmailFilter\Updater\ChangelogTracker\Dto\ChangesDto;
 use Beeyev\DisposableEmailFilter\Updater\Shared\Whitelist;
 use Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistItemDto;
 use Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistsDto;
+use Beeyev\DisposableEmailFilter\Updater\Support\Utils;
 
 /**
  * @phpstan-type LastSyncedBlacklists array{
@@ -162,9 +163,8 @@ final class ChangelogTracker
         }, $this->sourceBlacklistsDto->items))));
 
         $result = array_diff($bDomains, $lastSyncedBlacklistDomains);
-        natsort($result);
 
-        return array_values($result);
+        return Utils::naturalSort($result);
     }
 
     /**
@@ -183,9 +183,8 @@ final class ChangelogTracker
         }, $this->sourceBlacklistsDto->items))));
 
         $result = array_diff($lastSyncedBlacklistDomains, $bDomains);
-        natsort($result);
 
-        return array_values($result);
+        return Utils::naturalSort($result);
     }
 
     /**

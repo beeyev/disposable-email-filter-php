@@ -22,8 +22,8 @@ final class DomainsExtractorTest extends AbstractTestCase
 
         self::assertSame(
             [
-                '1dcv.com',
                 '01dcv.com',
+                '1dcv.com',
                 'abc02.com',
                 'abc03.com',
                 'abc1.com',
