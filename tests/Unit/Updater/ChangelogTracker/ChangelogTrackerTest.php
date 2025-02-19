@@ -19,6 +19,7 @@ use PHPUnit\Framework\Assert;
  * @uses  \Beeyev\DisposableEmailFilter\Updater\Shared\Whitelist
  * @uses  \Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistItemDto
  * @uses  \Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistsDto
+ * @uses  \Beeyev\DisposableEmailFilter\Updater\Support\Utils
  *
  * @internal
  */
