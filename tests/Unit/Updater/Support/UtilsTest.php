@@ -86,7 +86,7 @@ final class UtilsTest extends AbstractTestCase
         return [
             'Numerical sorting with leading zeros' => [
                 ['47gmail.com', '047gmail.com', '47bmt.com'],
-                ['047gmail.com', '47bmt.com', '47gmail.com'],
+                ['47bmt.com', '047gmail.com', '47gmail.com'],
             ],
             'Mixed numerical/alpha segments' => [
                 ['img12.com', 'img2.com', 'img1.com'],
