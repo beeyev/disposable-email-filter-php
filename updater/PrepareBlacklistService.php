@@ -10,7 +10,6 @@ use Beeyev\DisposableEmailFilter\Updater\DataManipulation\ContentsManipulatorInt
 use Beeyev\DisposableEmailFilter\Updater\SourceBlacklistsLoader\Dto\SourceBlacklistsDto;
 use Beeyev\DisposableEmailFilter\Updater\Support\DomainsExtractor;
 use Beeyev\DisposableEmailFilter\Updater\Support\Utils;
-use function Beeyev\DisposableEmailFilter\Updater\Support\Utils;
 
 /** @internal */
 final class PrepareBlacklistService
