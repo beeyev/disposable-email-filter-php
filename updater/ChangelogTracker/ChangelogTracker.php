@@ -163,7 +163,7 @@ final class ChangelogTracker
         }, $this->sourceBlacklistsDto->items))));
 
         $result = array_diff($bDomains, $lastSyncedBlacklistDomains);
-        
+
         return Utils::naturalSort($result);
     }
 
@@ -183,6 +183,7 @@ final class ChangelogTracker
         }, $this->sourceBlacklistsDto->items))));
 
         $result = array_diff($lastSyncedBlacklistDomains, $bDomains);
+
         return Utils::naturalSort($result);
     }
 
