@@ -44,7 +44,7 @@ final class DomainsExtractor
 
         $result = array_unique($result);
 
-        natsort($result);
+        Utils::naturalSort($result);
 
         return array_values($result);
     }

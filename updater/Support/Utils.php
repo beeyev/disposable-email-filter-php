@@ -85,4 +85,17 @@ final class Utils
     {
         return md5($string);
     }
+
+    /**
+     * @param array<string> $array
+     */
+    public static function naturalSort(array &$array): void
+    {
+        uasort($array, static function (string $a, string $b): int {
+            if (($cmp = strnatcmp($a, $b)) !== 0) {
+                return $cmp;
+            }
+            return strcmp($a, $b);
+        });
+    }
 }
