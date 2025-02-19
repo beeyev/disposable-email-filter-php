@@ -43,9 +43,7 @@ final class PrepareBlacklistService
         $result = array_diff($blacklistData, $whitelistData);
         assert(count($result) > 0);
 
-        Utils::naturalSort($result);
-
-        return array_values($result);
+        return Utils::naturalSort($result);
     }
 
     /**

@@ -76,9 +76,8 @@ final class UtilsTest extends AbstractTestCase
      */
     public function testNaturalSortOrdersDomainsCorrectly(array $input, array $expected): void
     {
-        $sut = $input;
-        Utils::naturalSort($sut);
-        self::assertSame($expected, array_values($sut));
+        Utils::naturalSort($input);
+        self::assertSame($expected, $input);
     }
 
     public function domainProvider(): array

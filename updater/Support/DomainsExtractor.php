@@ -44,9 +44,7 @@ final class DomainsExtractor
 
         $result = array_unique($result);
 
-        Utils::naturalSort($result);
-
-        return array_values($result);
+        return Utils::naturalSort($result);
     }
 
     private static function isDomainValid(string $domain): bool

@@ -87,16 +87,23 @@ final class Utils
     }
 
     /**
-     * @param array<string> $array
+     * @param array<string> $inputArray
+     *
+     * @return array<string>
      */
-    public static function naturalSort(array &$array): void
+    public static function naturalSort(array $inputArray): array
     {
-        uasort($array, static function (string $a, string $b): int {
+
+        $sut = $inputArray;
+
+        uasort($sut, static function (string $a, string $b): int {
             if (($cmp = strnatcmp($a, $b)) !== 0) {
                 return $cmp;
             }
 
             return strcmp($a, $b);
         });
+
+        return array_values($sut);
     }
 }
