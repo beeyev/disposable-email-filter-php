@@ -76,8 +76,8 @@ final class UtilsTest extends AbstractTestCase
      */
     public function testNaturalSortOrdersDomainsCorrectly(array $input, array $expected): void
     {
-        Utils::naturalSort($input);
-        self::assertSame($expected, $input);
+        $result = Utils::naturalSort($input);
+        self::assertSame($expected, $result);
     }
 
     public function domainProvider(): array
@@ -111,22 +111,18 @@ final class UtilsTest extends AbstractTestCase
                 ['example.42', 'example.7', 'example.007'],
                 ['example.007', 'example.7', 'example.42'],
             ],
+            'Empty' => [
+                [],
+                [],
+            ],
+            'Single' => [
+                ['single.com'],
+                ['single.com'],
+            ],
+            'Duplicates' => [
+                ['dup.com', 'dup.com'],
+                ['dup.com', 'dup.com'],
+            ],
         ];
-    }
-
-    // Test edge cases
-    public function testSpecialCases(): void
-    {
-        $empty = [];
-        Utils::naturalSort($empty);
-        self::assertSame([], $empty);
-
-        $single = ['single.com'];
-        Utils::naturalSort($single);
-        self::assertSame(['single.com'], $single);
-
-        $duplicates = ['dup.com', 'dup.com'];
-        Utils::naturalSort($duplicates);
-        self::assertSame(['dup.com', 'dup.com'], $duplicates);
     }
 }

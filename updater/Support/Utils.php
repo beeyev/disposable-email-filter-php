@@ -93,7 +93,6 @@ final class Utils
      */
     public static function naturalSort(array $inputArray): array
     {
-
         $sut = $inputArray;
 
         uasort($sut, static function (string $a, string $b): int {

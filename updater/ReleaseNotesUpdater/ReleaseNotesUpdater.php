@@ -125,6 +125,6 @@ final class ReleaseNotesUpdater
             $result[] = '... See full list in the source file.';
         }
 
-        return implode(PHP_EOL, $result); // @phpstan-ignore return.type
+        return implode(PHP_EOL, $result);
     }
 }
