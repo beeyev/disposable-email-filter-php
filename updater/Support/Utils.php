@@ -95,6 +95,7 @@ final class Utils
             if (($cmp = strnatcmp($a, $b)) !== 0) {
                 return $cmp;
             }
+
             return strcmp($a, $b);
         });
     }
