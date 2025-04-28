@@ -64,7 +64,7 @@ final class PhpBlacklistUpdater implements BlacklistUpdaterInterface
             '<?php',
             '/**',
             ' * @author Alexander Tebiev - https://github.com/beeyev',
-            ' * @link https://github.com/beeyev/fake-email-filter',
+            ' * @link https://github.com/beeyev/disposable-email-filter-php',
             ' *',
             " * File updated at: {$currentDate->format('Y-m-d H:i:s (T)')}",
             ' */',
