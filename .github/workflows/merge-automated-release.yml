@@ -38,7 +38,7 @@ jobs:
     if: needs.prepare.outputs.pr_found == 'true'
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: PR details
         run: |
