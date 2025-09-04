@@ -4,11 +4,11 @@
  *
  * @see https://github.com/beeyev/disposable-email-filter-php
  *
- * File updated at: 2025-08-31 11:24:43 (UTC)
+ * File updated at: 2025-09-04 11:26:45 (UTC)
  */
 return [
     'updated_at' => DateTimeImmutable::__set_state([
-        'date' => '2025-08-31 11:24:43.954044',
+        'date' => '2025-09-04 11:26:45.958332',
         'timezone_type' => 3,
         'timezone' => 'UTC',
     ]),
@@ -9149,6 +9149,7 @@ return [
         'bleblebless.pl' => true,
         'blendercompany.com' => true,
         'blendertv.com' => true,
+        'blenro.com' => true,
         'blerf.com' => true,
         'blerg.com' => true,
         'blespi.com' => true,
