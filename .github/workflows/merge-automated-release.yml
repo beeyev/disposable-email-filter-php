@@ -23,7 +23,7 @@ jobs:
       pr_body: ${{ steps.PR.outputs.pr_body }}
     steps:
       - name: Get current PR
-        uses: 8BitJonny/gh-get-current-pr@3.0.0
+        uses: 8BitJonny/gh-get-current-pr@4.0.0
         id: PR
 
       - name: PR details
