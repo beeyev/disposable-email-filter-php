@@ -4,11 +4,11 @@
  *
  * @see https://github.com/beeyev/disposable-email-filter-php
  *
- * File updated at: 2025-09-04 11:26:45 (UTC)
+ * File updated at: 2025-09-10 11:25:47 (UTC)
  */
 return [
     'updated_at' => DateTimeImmutable::__set_state([
-        'date' => '2025-09-04 11:26:45.958332',
+        'date' => '2025-09-10 11:25:47.362344',
         'timezone_type' => 3,
         'timezone' => 'UTC',
     ]),
@@ -11545,6 +11545,7 @@ return [
         'cazino777.pro' => true,
         'cazinoz.biz' => true,
         'cazis.fr' => true,
+        'cazlg.com' => true,
         'cazzie.website' => true,
         'cazzo.cf' => true,
         'cazzo.ga' => true,
@@ -11789,6 +11790,7 @@ return [
         'certifiedtgp.com' => true,
         'certiflix.com' => true,
         'certphysicaltherapist.com' => true,
+        'certve.com' => true,
         'cervejeiromestre.com.br' => true,
         'cesitayedrive.live' => true,
         'cesknurs69.de' => true,
@@ -13954,6 +13956,7 @@ return [
         'csmq.com' => true,
         'csmservicios.com' => true,
         'csoftmail.cn' => true,
+        'cspaus.com' => true,
         'cspeakingbr.com' => true,
         'cspointblank.com' => true,
         'csr.hsgusa.com' => true,
@@ -26738,6 +26741,7 @@ return [
         'idolsystems.info' => true,
         'idomail.com' => true,
         'idomain24.pl' => true,
+        'idont.date' => true,
         'idotem.cf' => true,
         'idotem.ga' => true,
         'idotem.gq' => true,
@@ -30376,6 +30380,7 @@ return [
         'kniffel-online.info' => true,
         'kniga-galob.ru' => true,
         'knightsworth.com' => true,
+        'knilok.com' => true,
         'knime.app' => true,
         'knime.online' => true,
         'knime.us' => true,
@@ -32351,6 +32356,7 @@ return [
         'locateme10.com' => true,
         'locationans.ru' => true,
         'locationlocationlocation.eu' => true,
+        'locawin.com' => true,
         'locbanbekhongtuongtac.com' => true,
         'loccomail.host' => true,
         'locialispl.com' => true,
@@ -36895,6 +36901,7 @@ return [
         'muffinbasketap.com' => true,
         'mufollowsa.com' => true,
         'mufux.com' => true,
+        'mugadget.com' => true,
         'mugesutopal.shop' => true,
         'mugglenet.org' => true,
         'mughftg5rtgfx.gq' => true,
@@ -55021,6 +55028,7 @@ return [
         'ussje.com' => true,
         'ussostunt.com' => true,
         'ussv.club' => true,
+        'ustorp.com' => true,
         'ustudentli.com' => true,
         'usualism.site' => true,
         'usuus.com' => true,
