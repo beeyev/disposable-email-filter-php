@@ -4,11 +4,11 @@
  *
  * @see https://github.com/beeyev/disposable-email-filter-php
  *
- * File updated at: 2025-10-31 11:27:11 (UTC)
+ * File updated at: 2025-11-01 11:25:05 (UTC)
  */
 return [
     'updated_at' => DateTimeImmutable::__set_state([
-        'date' => '2025-10-31 11:27:11.373961',
+        'date' => '2025-11-01 11:25:05.426930',
         'timezone_type' => 3,
         'timezone' => 'UTC',
     ]),
@@ -10612,7 +10612,6 @@ return [
         'buttmonkey.com' => true,
         'buttonfans.com' => true,
         'buttonrulesall.com' => true,
-        'buugl.anonbox.net' => true,
         'buuu.com' => true,
         'buvgul.com' => true,
         'buviz.anonbox.net' => true,
@@ -15827,8 +15826,10 @@ return [
         'disposablemails.com' => true,
         'dispose.it' => true,
         'disposeamail.com' => true,
+        'disposely.xyz' => true,
         'disposemail.com' => true,
         'disposemymail.com' => true,
+        'disposly.com' => true,
         'dispostable.com' => true,
         'disputespecialists.com' => true,
         'disruptionlabs.com' => true,
@@ -16914,7 +16915,6 @@ return [
         'dundeeusedcars.co.uk' => true,
         'dundo.tk' => true,
         'dunefee.com' => true,
-        'dungmart.site' => true,
         'dungzuoi.uk' => true,
         'dunhamsports.com' => true,
         'dunhila.com' => true,
@@ -19888,6 +19888,7 @@ return [
         'fastermail.com' => true,
         'fastermand.com' => true,
         'fasternet.biz' => true,
+        'fastestflex.com' => true,
         'fastestsmtp.com' => true,
         'fastestwayto-losebellyfat.com' => true,
         'fastfitnessroutine.com' => true,
@@ -25639,6 +25640,7 @@ return [
         'home.glasstopdiningtable.org' => true,
         'homeandhouse.website' => true,
         'homebusinesshosting.us' => true,
+        'homecut.pro' => true,
         'homedecorsaleoffus.com' => true,
         'homedepinst.com' => true,
         'homedesignsidea.info' => true,
@@ -29076,7 +29078,6 @@ return [
         'jokenaka.press' => true,
         'jolajola422.com' => true,
         'joliejoie.com' => true,
-        'jolismomes.es' => true,
         'joliys.pro' => true,
         'jollyfree.com' => true,
         'jollymove.xyz' => true,
@@ -39202,6 +39203,7 @@ return [
         'novaeliza.art' => true,
         'novaemail.com' => true,
         'novagun.com' => true,
+        'novaopcj.icu' => true,
         'novartismails.com' => true,
         'novelbowl.xyz' => true,
         'novemberdelta.myverizonmail.top' => true,
@@ -46667,6 +46669,7 @@ return [
         's3wrtgnn17k.gq' => true,
         's3wrtgnn17k.ml' => true,
         's3wrtgnn17k.tk' => true,
+        's4cbj.anonbox.net' => true,
         's4ngnm.xyz' => true,
         's6.weprof.it' => true,
         's6a5ssdgjhg99.cf' => true,
@@ -51709,6 +51712,7 @@ return [
         'temp-mail.io' => true,
         'temp-mail.life' => true,
         'temp-mail.live' => true,
+        'temp-mail.lol' => true,
         'temp-mail.ml' => true,
         'temp-mail.monster' => true,
         'temp-mail.net' => true,
