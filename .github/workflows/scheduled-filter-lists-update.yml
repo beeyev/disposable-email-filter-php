@@ -23,7 +23,7 @@ jobs:
       PHP_VERSION: '7.2'
     steps:
       - name: Check out code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
