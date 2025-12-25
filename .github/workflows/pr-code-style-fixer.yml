@@ -49,7 +49,7 @@ jobs:
 
       - name: Cache PHP CS Fixer results
         if: ${{ steps.changed-php-files.outputs.any_changed == 'true' }}
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ./.php-cs-fixer.cache
           key: php-cs-fixer-cache-${{ github.workflow }}

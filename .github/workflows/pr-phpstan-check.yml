@@ -44,7 +44,7 @@ jobs:
 
       # Cache PHPStan results discussion: https://github.com/phpstan/phpstan/discussions/9301
       - name: Cache PHPStan results
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ steps.phpstan-result-cache-dir.outputs.PHPSTAN_CACHE_DIR }}
           key: phpstan-result-cache-${{ github.run_id }} # always unique key - always writes a new cache
