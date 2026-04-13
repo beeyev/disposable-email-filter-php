@@ -52,7 +52,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create new release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: "${{ steps.tag_version.outputs.new_tag }} - (filter list update)"
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
