@@ -28,8 +28,8 @@ runs:
       id: cache-PHP_EXTENSIONS
       uses: shivammathur/cache-extensions@v1
       with:
-        php-version: inputs.PHP_VERSION
-        extensions: inputs.PHP_EXTENSIONS
+        php-version: ${{ inputs.PHP_VERSION }}
+        extensions: ${{ inputs.PHP_EXTENSIONS }}
         key: PHP_EXTENSIONS-${{ github.workflow }}
 
     - name: Cache PHP extensions
@@ -46,7 +46,7 @@ runs:
         extensions: ${{ inputs.PHP_EXTENSIONS }}
         coverage: ${{ ((inputs.USE_COVERAGE == 'yes') && 'xdebug') || 'none' }}
         ini-values: ${{ inputs.PHP_INI_VALUES }}
-        tools: ${{ inputs.php-tools }}
+        tools: ${{ inputs.PHP_TOOLS }}
 
     - name: Get composer cache directory
       id: composer-cache-files-dir
