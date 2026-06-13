@@ -23,7 +23,7 @@ jobs:
       github.event.pull_request.draft == false
       || !startsWith(github.head_ref, 'code-style-fix/')
     env:
-      PHP-VERSION: '7.2'
+      PHP_VERSION: '7.2'
     steps:
       - name: Check out code
         uses: actions/checkout@v6
